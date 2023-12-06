@@ -1,32 +1,56 @@
-﻿using GeneralMotors.Application.UseCases.CarTypes.Queries;
-
-namespace GeneralMotors.API.Controllers
+﻿namespace GeneralMotors.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class CarTypeController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IDistributedCache _distributedCache;
 
-        public CarTypeController(IMediator mediator)
+        public CarTypeController(IMediator mediator, IDistributedCache distributedCache)
         {
             _mediator = mediator;
+            _distributedCache = distributedCache;
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetAllCarType()
         {
-            var carType = await _mediator.Send(new GetAllCarTypesQuery());
+            var fromCache = await _distributedCache.GetStringAsync($"GetAllCarType");
+            if (fromCache is null)
+            {
+                var cartypes = await _mediator.Send(new GetAllCarTypesQuery());
 
-            return Ok(carType);
+                fromCache = JsonSerializer.Serialize(cartypes);
+                await _distributedCache.SetStringAsync($"GetAllCarType", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<List<CarType>>(fromCache);
+            return Ok(result);
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetByIdCarType(int id)
         {
-            var carType = await _mediator.Send(new GetByIdCarTypeQuery() { Id = id });
 
-            return Ok(carType);
+            var fromCache = await _distributedCache.GetStringAsync($"CarType{id}");
+
+            if (fromCache is null)
+            {
+                var carType = await _mediator.Send(new GetByIdCarTypeQuery() { Id = id });
+
+                fromCache = JsonSerializer.Serialize(carType);
+                await _distributedCache.SetStringAsync($"CarType{carType.Id}", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<CarType>(fromCache);
+
+            return Ok(result);
+
         }
 
     }
