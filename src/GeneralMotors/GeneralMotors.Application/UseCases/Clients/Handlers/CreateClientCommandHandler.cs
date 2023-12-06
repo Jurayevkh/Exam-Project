@@ -17,12 +17,14 @@ public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, b
         {
             Client client = new Client()
             {
-                FullName=request.FullName,
-                Contact=request.Contact,
-                UserName=request.UserName,
-                Password=request.Password,
-                Email=request.Email,
-                Address=request.Address
+                FullName = request.FullName,
+                Contact = request.Contact,
+                UserName = request.UserName,
+                Password = request.Password,
+                Email = request.Email,
+                Address = request.Address,
+                Role = request.Role
+            
             };
 
             await _applicationDbContext.Clients.AddAsync(client);
