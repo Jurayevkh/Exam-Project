@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="UseCases\" />
+    <None Remove="UseCases\Cars\Commands\" />
+    <None Remove="UseCases\Cars\Queries\" />
+    <None Remove="UseCases\Cars\Handlers\" />
+    <None Remove="Abstractions\" />
+    <None Remove="UseCases\Cars\" />
+    <None Remove="UseCases\Clients\" />
+    <None Remove="UseCases\Dillers\" />
+    <None Remove="UseCases\CarTypes\" />
+    <None Remove="UseCases\CarClients\" />
+    <None Remove="UseCases\CarClients\Commands\" />
+    <None Remove="UseCases\CarClients\Handlers\" />
+    <None Remove="UseCases\CarClients\Queries\" />
+    <None Remove="UseCases\CarTypes\Commands\" />
+    <None Remove="UseCases\CarTypes\Handlers\" />
+    <None Remove="UseCases\CarTypes\Queries\" />
+    <None Remove="UseCases\Clients\Commands\" />
+    <None Remove="UseCases\Clients\Handlers\" />
+    <None Remove="UseCases\Clients\Queries\" />
+    <None Remove="UseCases\Dillers\Commands\" />
+    <None Remove="UseCases\Dillers\Handlers\" />
+    <None Remove="UseCases\Dillers\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UseCases\" />
+    <Folder Include="UseCases\Cars\Commands\" />
+    <Folder Include="UseCases\Cars\Queries\" />
+    <Folder Include="UseCases\Cars\Handlers\" />
+    <Folder Include="Abstractions\" />
+    <Folder Include="UseCases\Cars\" />
+    <Folder Include="UseCases\Clients\" />
+    <Folder Include="UseCases\Dillers\" />
+    <Folder Include="UseCases\CarTypes\" />
+    <Folder Include="UseCases\CarClients\" />
+    <Folder Include="UseCases\CarClients\Commands\" />
+    <Folder Include="UseCases\CarClients\Handlers\" />
+    <Folder Include="UseCases\CarClients\Queries\" />
+    <Folder Include="UseCases\CarTypes\Commands\" />
+    <Folder Include="UseCases\CarTypes\Handlers\" />
+    <Folder Include="UseCases\CarTypes\Queries\" />
+    <Folder Include="UseCases\Clients\Commands\" />
+    <Folder Include="UseCases\Clients\Handlers\" />
+    <Folder Include="UseCases\Clients\Queries\" />
+    <Folder Include="UseCases\Dillers\Commands\" />
+    <Folder Include="UseCases\Dillers\Handlers\" />
+    <Folder Include="UseCases\Dillers\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralMotors.Domain\GeneralMotors.Domain.csproj" />
+  </ItemGroup>
+</Project>
