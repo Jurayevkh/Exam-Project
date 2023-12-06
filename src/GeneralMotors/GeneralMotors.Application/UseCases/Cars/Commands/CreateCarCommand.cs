@@ -1,6 +1,6 @@
 ﻿namespace GeneralMotors.Application.UseCases.Cars.Commands;
 
-public class CreateCarCommand:IRequest
+public class CreateCarCommand:IRequest<bool>
 {
     public string Name { get; set; }
     public string Model { get; set; }
