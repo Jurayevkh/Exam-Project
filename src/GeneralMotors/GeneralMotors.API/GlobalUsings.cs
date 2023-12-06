@@ -3,4 +3,17 @@ global using GeneralMotors.Application.UseCases.Cars.Commands;
 global using GeneralMotors.Application.UseCases.Cars.Queries;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
-
+global using System.Text.Json;
+global using GeneralMotors.Application.UseCases.CarTypes.Queries;
+global using GeneralMotors.Domain.Entities.CarTypes;
+global using Microsoft.Extensions.Caching.Distributed;
+global using GeneralMotors.Domain.Entities.Cars;
+global using GeneralMotors.API.DTOs.Clients;
+global using GeneralMotors.Application.UseCases.Clients.Commands;
+global using GeneralMotors.Application.UseCases.Clients.Queries;
+global using GeneralMotors.API.DTOs.Dillers;
+global using GeneralMotors.Application.UseCases.Dillers.Commands;
+global using GeneralMotors.Application.UseCases.Dillers.Queries;
+global using GeneralMotors.API.DTOs.CarClient;
+global using GeneralMotors.Application.UseCases.CarClients.Commands;
+global using GeneralMotors.Application.UseCases.CarClients.Queries;
