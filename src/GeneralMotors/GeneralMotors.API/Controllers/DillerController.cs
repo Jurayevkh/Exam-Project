@@ -1,7 +1,6 @@
-﻿
-using GeneralMotors.API.DTOs.Dillers;
-using GeneralMotors.Application.UseCases.Dillers.Commands;
-using GeneralMotors.Application.UseCases.Dillers.Queries;
+﻿using GeneralMotors.Domain.Entities.Clients;
+using GeneralMotors.Domain.Entities.Dillers;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace GeneralMotors.API.Controllers
 {
@@ -10,26 +9,54 @@ namespace GeneralMotors.API.Controllers
     public class DillerController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IDistributedCache _distributedCache;
 
-        public DillerController(IMediator mediator)
+        public DillerController(IMediator mediator, IDistributedCache distributedCache)
         {
             _mediator = mediator;
+            _distributedCache = distributedCache;
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetByIdDiller(int id)
         {
-            var diller = await _mediator.Send(new GetByIdDillerQuery() { Id = id });
 
-            return Ok(diller);
+            var fromCache = await _distributedCache.GetStringAsync($"Diller{id}");
+
+            if (fromCache is null)
+            {
+                var diller = await _mediator.Send(new GetByIdDillerQuery() { Id = id });
+
+                fromCache = JsonSerializer.Serialize(diller);
+                await _distributedCache.SetStringAsync($"Diller{diller.Id}", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<Diller>(fromCache);
+
+            return Ok(result);
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetAllDiller()
         {
-            var diller = await _mediator.Send(new GetAllDillerQuery());
 
-            return Ok(diller);
+            var fromCache = await _distributedCache.GetStringAsync($"GetAllDiller");
+
+            if (fromCache is null)
+            {
+                var diller = await _mediator.Send(new GetAllDillerQuery());
+
+                fromCache = JsonSerializer.Serialize(diller);
+                await _distributedCache.SetStringAsync($"GetAllDiller", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<List<Diller>>(fromCache);
+
+            return Ok(result);
         }
 
         [HttpPost]
