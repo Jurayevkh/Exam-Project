@@ -1,6 +1,6 @@
 ﻿namespace GeneralMotors.Application.UseCases.Cars.Commands;
 
-public class UpdateAllColumnCarCommand:IRequest
+public class UpdateAllColumnCarCommand:IRequest<bool>
 {
     public int Id { get; set; }
     public string Name { get; set; }
