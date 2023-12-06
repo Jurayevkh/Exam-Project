@@ -1,6 +1,7 @@
 ﻿namespace GeneralMotors.Application.UseCases.Cars.Handlers;
 
-public class DeleteCarCommandHandler : AsyncRequestHandler<DeleteCarCommand>
+
+public class DeleteCarCommandHandler : IRequestHandler<DeleteCarCommand, bool>
 {
     private readonly IApplicationDbContext _applicationDbContext;
 
@@ -9,11 +10,23 @@ public class DeleteCarCommandHandler : AsyncRequestHandler<DeleteCarCommand>
         _applicationDbContext = applicationDbContext;
     }
 
-    protected override async Task Handle(DeleteCarCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteCarCommand request, CancellationToken cancellationToken)
     {
-        var car = _applicationDbContext.Cars.FirstOrDefault(car=>car.Id==request.Id);
-        _applicationDbContext.Cars.Remove(car);
-        await _applicationDbContext.SaveChangesAsync(cancellationToken);
+        try
+        {
+            var car = _applicationDbContext.Cars.FirstOrDefault(car => car.Id == request.Id);
+            _applicationDbContext.Cars.Remove(car);
+            var result=await _applicationDbContext.SaveChangesAsync(cancellationToken);
+            return result > 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
+
+
+
+
 
