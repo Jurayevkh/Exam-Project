@@ -1,6 +1,5 @@
-﻿using GeneralMotors.API.DTOs.Clients;
-using GeneralMotors.Application.UseCases.Clients.Commands;
-using GeneralMotors.Application.UseCases.Clients.Queries;
+﻿using GeneralMotors.Domain.Entities.Clients;
+
 namespace GeneralMotors.API.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -8,25 +7,53 @@ namespace GeneralMotors.API.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IDistributedCache _distributedCache;
 
-        public ClientController(IMediator mediator)
+        public ClientController(IMediator mediator, IDistributedCache distributedCache)
         {
             _mediator = mediator;
+            _distributedCache = distributedCache;
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetAllClients()
         {
-            var clients = await _mediator.Send(new GetAllClientQuery());
+            var fromCache = await _distributedCache.GetStringAsync($"GetAllClient");
 
-            return Ok(clients);
+            if (fromCache is null)
+            {
+                var client = await _mediator.Send(new GetAllClientQuery());
+
+                fromCache = JsonSerializer.Serialize(client);
+                await _distributedCache.SetStringAsync($"GetAllClient", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<List<Client>>(fromCache);
+
+            return Ok(result);
         }
+    
         [HttpGet]
         public async ValueTask<IActionResult> GetByIdClients(int id)
         {
-            var client = await _mediator.Send(new GetByIdClientQuery() { Id = id });
+            var fromCache = await _distributedCache.GetStringAsync($"Client{id}");
 
-            return Ok(client);
+            if (fromCache is null)
+            {
+                var client = await _mediator.Send(new GetByIdClientQuery() { Id = id });
+
+                fromCache = JsonSerializer.Serialize(client);
+                await _distributedCache.SetStringAsync($"Client{client.Id}", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<Client>(fromCache);
+
+            return Ok(result);
+      
         }
 
         [HttpPost]
@@ -34,12 +61,13 @@ namespace GeneralMotors.API.Controllers
         {
             CreateClientCommand client = new CreateClientCommand()
             {
-                FullName=createClientDto.FullName,
-                Contact=createClientDto.Contact,
-                UserName=createClientDto.UserName,
-                Password=createClientDto.Password,
-                Email=createClientDto.Email,
-                Address=createClientDto.Address,
+                FullName = createClientDto.FullName,
+                Contact = createClientDto.Contact,
+                UserName = createClientDto.UserName,
+                Password = createClientDto.Password,
+                Email = createClientDto.Email,
+                Address = createClientDto.Address,
+                Role = "client",
             
             };
             var result = await _mediator.Send(client);
@@ -58,6 +86,7 @@ namespace GeneralMotors.API.Controllers
                 Password = updateClientDto.Password,
                 Email = updateClientDto.Email,
                 Address = updateClientDto.Address,
+                Role=updateClientDto.Role
             };
 
             var result = await _mediator.Send(client);
