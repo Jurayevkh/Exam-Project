@@ -37,6 +37,53 @@ namespace GeneralMotors.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Type = "Sedan"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Type = "Kupe"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Type = "universal"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Type = "hetchbek"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Type = "liftbek"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Type = "limuzin"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Type = "kabriolet"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Type = "pikap"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Type = "SUV"
+                        });
                 });
 
             modelBuilder.Entity("GeneralMotors.Domain.Entities.Cars.Car", b =>
@@ -58,7 +105,7 @@ namespace GeneralMotors.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -84,12 +131,38 @@ namespace GeneralMotors.Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CarTypeId")
+                        .IsUnique();
+
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("GeneralMotors.Domain.Entities.Cars.CarClient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("CarClients");
                 });
 
             modelBuilder.Entity("GeneralMotors.Domain.Entities.Clients.Client", b =>
@@ -177,6 +250,68 @@ namespace GeneralMotors.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SuperAdmins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Rustambek Jo'rayev",
+                            Password = "qwerty123",
+                            UserName = "rustam"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Bahriddin Abdusalomov",
+                            Password = "BaxaKriminal",
+                            UserName = "baxa_tashkentskiy"
+                        });
+                });
+
+            modelBuilder.Entity("GeneralMotors.Domain.Entities.Cars.Car", b =>
+                {
+                    b.HasOne("GeneralMotors.Domain.Entities.CarTypes.CarType", "CarType")
+                        .WithOne("Car")
+                        .HasForeignKey("GeneralMotors.Domain.Entities.Cars.Car", "CarTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CarType");
+                });
+
+            modelBuilder.Entity("GeneralMotors.Domain.Entities.Cars.CarClient", b =>
+                {
+                    b.HasOne("GeneralMotors.Domain.Entities.Cars.Car", "Car")
+                        .WithMany("CarClients")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GeneralMotors.Domain.Entities.Clients.Client", "Client")
+                        .WithMany("CarClients")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("GeneralMotors.Domain.Entities.CarTypes.CarType", b =>
+                {
+                    b.Navigation("Car")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GeneralMotors.Domain.Entities.Cars.Car", b =>
+                {
+                    b.Navigation("CarClients");
+                });
+
+            modelBuilder.Entity("GeneralMotors.Domain.Entities.Clients.Client", b =>
+                {
+                    b.Navigation("CarClients");
                 });
 #pragma warning restore 612, 618
         }
