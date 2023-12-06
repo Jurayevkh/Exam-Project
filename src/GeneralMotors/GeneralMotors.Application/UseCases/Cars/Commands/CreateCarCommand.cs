@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace GeneralMotors.Application.UseCases.Cars.Commands;
+﻿namespace GeneralMotors.Application.UseCases.Cars.Commands;
 
 public class CreateCarCommand:IRequest
 {
@@ -11,6 +9,7 @@ public class CreateCarCommand:IRequest
     public string Fuel_Type { get; set; }
     public string Features { get; set; }
     public string Description { get; set; }
+    public DateTime CreatedAt { get; set; }
     public int CarTypeId { get; set; }
     public string CarImage { get; set; }
 }
