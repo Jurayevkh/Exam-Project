@@ -1,6 +1,6 @@
 ﻿namespace GeneralMotors.Application.UseCases.Cars.Queries;
 
-public class GetAllCarType:IRequest<Car>
+public class GetByIdCarQuery:IRequest<Car>
 {
     public int Id { get; set; }
 }
