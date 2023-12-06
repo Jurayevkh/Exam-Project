@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Entities\" />
+    <None Remove="Entities\Cars\" />
+    <None Remove="Entities\Clients\" />
+    <None Remove="Entities\Dillers\" />
+    <None Remove="Entities\CarTypes\" />
+    <None Remove="Entities\SuperAdmins\" />
+    <None Remove="Exceptions\" />
+    <None Remove="Exceptions\Cars\" />
+    <None Remove="Exceptions\CarTypes\" />
+    <None Remove="Exceptions\Dillers\" />
+    <None Remove="Exceptions\Clients\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Entities\Cars\" />
+    <Folder Include="Entities\Clients\" />
+    <Folder Include="Entities\Dillers\" />
+    <Folder Include="Entities\CarTypes\" />
+    <Folder Include="Entities\SuperAdmins\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Exceptions\Cars\" />
+    <Folder Include="Exceptions\CarTypes\" />
+    <Folder Include="Exceptions\Dillers\" />
+    <Folder Include="Exceptions\Clients\" />
+  </ItemGroup>
+</Project>
