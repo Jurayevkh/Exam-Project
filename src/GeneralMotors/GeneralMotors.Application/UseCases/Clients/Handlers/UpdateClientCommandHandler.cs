@@ -27,6 +27,7 @@ public class UpdateClientCommandHandler:IRequestHandler<UpdateClientCommand,bool
             client.Password = request.Password;
             client.Email = request.Email;
             client.Address = request.Address;
+            client.Role = request.Role;
 
             _applicationDbContext.Clients.Update(client);
             var result=await _applicationDbContext.SaveChangesAsync(cancellationToken);
