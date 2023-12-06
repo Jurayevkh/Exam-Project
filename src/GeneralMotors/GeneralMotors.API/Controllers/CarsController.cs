@@ -5,24 +5,53 @@
     public class CarsController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IDistributedCache _distributedCache;
 
-        public CarsController(IMediator mediator)
+        public CarsController(IMediator mediator,IDistributedCache distributedCache)
         {
             _mediator = mediator;
+            _distributedCache = distributedCache;
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetByIdCarAsync(int id)
         {
-            var car = await _mediator.Send(new GetAllCarType() {Id=id});
-      
-            return Ok(car);
+            var fromCache = await _distributedCache.GetStringAsync($"Car{id}");
+
+            if(fromCache is null)
+            {
+                var car = await _mediator.Send(new GetByIdCarQuery() {Id=id});
+           
+                fromCache = JsonSerializer.Serialize(car);
+                await _distributedCache.SetStringAsync($"Car{car.Id}", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow=TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<Car>(fromCache);
+
+            return Ok(result);
         }
+
+
         [HttpGet]
         public async ValueTask<IActionResult> GetAllCarAsync()
         {
-            var cars = await _mediator.Send(new GetAllCarQuery());
-            return Ok(cars);
+            var fromCache = await _distributedCache.GetStringAsync("GetAllCar");
+
+            if(fromCache is null)
+            {
+                var cars = await _mediator.Send(new GetAllCarQuery());
+
+                fromCache = JsonSerializer.Serialize(cars);
+                await _distributedCache.SetStringAsync("GetAllCar", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<List<Car>>(fromCache);
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -42,8 +71,8 @@
                 CarImage=carDto.CarImage
             };
 
-            await _mediator.Send(car);
-            return Ok("Created!");
+            var result=await _mediator.Send(car);
+            return Ok(result);
         }
 
         [HttpPut]
@@ -64,16 +93,16 @@
             CarImage = updateCarDto.CarImage,
             };
 
-            await _mediator.Send(car);
+            var result=await _mediator.Send(car);
 
-            return Ok("Updated");
+            return Ok(result);
         }
         [HttpDelete]
         public async ValueTask<IActionResult> DeleteCar(int id)
         {
-            await _mediator.Send(new DeleteCarCommand() {Id=id});
+            var result=await _mediator.Send(new DeleteCarCommand() {Id=id});
 
-            return Ok("Deleted");
+            return Ok(result);
         }
 
     }
