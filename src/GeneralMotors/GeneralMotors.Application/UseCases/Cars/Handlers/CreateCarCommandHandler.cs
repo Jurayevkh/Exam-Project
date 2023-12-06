@@ -1,6 +1,7 @@
 ﻿namespace GeneralMotors.Application.UseCases.Cars.Handlers;
 
-public class CreateCarCommandHandler : AsyncRequestHandler<CreateCarCommand>
+
+public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, bool>
 {
     private readonly IApplicationDbContext _applicationDbContext;
 
@@ -9,24 +10,38 @@ public class CreateCarCommandHandler : AsyncRequestHandler<CreateCarCommand>
         _applicationDbContext = applicationDbContext;
     }
 
-    protected override async Task Handle(CreateCarCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreateCarCommand request, CancellationToken cancellationToken)
     {
-        Car car = new Car()
+        try
         {
-            Name = request.Name,
-            Model = request.Model,
-            Price = request.Price,
-            Color = request.Color,
-            Fuel_Type = request.Fuel_Type,
-            Features = request.Features,
-            Description = request.Description,
-            CreatedAt=request.CreatedAt,
-            CarTypeId = request.CarTypeId,
-            CarImage = request.CarImage,
-        };
+            Car car = new Car()
+            {
+                Name = request.Name,
+                Model = request.Model,
+                Price = request.Price,
+                Color = request.Color,
+                Fuel_Type = request.Fuel_Type,
+                Features = request.Features,
+                Description = request.Description,
+                CreatedAt = request.CreatedAt,
+                CarTypeId = request.CarTypeId,
+                CarImage = request.CarImage,
+            };
+            await _applicationDbContext.Cars.AddAsync(car);
+            var result=await _applicationDbContext.SaveChangesAsync(cancellationToken);
+            return result > 0;
+        }
+        catch
+        {
+            return false;
+        }
 
-        await _applicationDbContext.Cars.AddAsync(car);
-        await _applicationDbContext.SaveChangesAsync(cancellationToken);
-        
-    }
 }
+}
+
+
+
+
+
+
+
