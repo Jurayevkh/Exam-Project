@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeneralMotors.Application.UseCases.Cars.Handlers;
 
-public class GetByIdCarQueryHandler : IRequestHandler<GetAllCarType,Car>
+public class GetByIdCarQueryHandler : IRequestHandler<GetByIdCarQuery,Car>
 {
     private readonly IApplicationDbContext _applicationDbContext;
 
@@ -12,11 +12,11 @@ public class GetByIdCarQueryHandler : IRequestHandler<GetAllCarType,Car>
         _applicationDbContext = applicationDbContext;
     }
 
-    public async Task<Car> Handle(GetAllCarType request, CancellationToken cancellationToken)
+    public async Task<Car> Handle(GetByIdCarQuery request, CancellationToken cancellationToken)
     {
         var car = await _applicationDbContext.Cars.FirstOrDefaultAsync(car=>car.Id==request.Id);
 
-        return car;
+        return car ?? new Car();
     }
 }
 
