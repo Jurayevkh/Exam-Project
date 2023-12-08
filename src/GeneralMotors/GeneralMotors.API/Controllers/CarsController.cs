@@ -29,7 +29,7 @@
                 });
             }
             var result = JsonSerializer.Deserialize<Car>(fromCache);
-
+  
             return Ok(result);
         }
 
