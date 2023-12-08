@@ -11,7 +11,7 @@ public class User
 
     public override string ToString()
     {
-        return $"Id:{Id},FirstName:{FirstName},LastName:{LastName},MiddleName{MiddleName},Age:{Age},Email:{Email}";
-    }
+        return $"Id: {Id} ,FirstName: {FirstName} ,LastName: {LastName} ,MiddleName {MiddleName} ,Age: {Age} ,Email: {Email} ";
+    } 
 }
 
