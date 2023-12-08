@@ -1,4 +1,5 @@
-﻿using QRCoder;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using static QRCoder.PayloadGenerator;
 
 namespace QRCodes.API.Controllers
 {
@@ -19,20 +20,25 @@ namespace QRCodes.API.Controllers
 
             var result = await _mediator.Send(new GetAllUsersQuery());
 
-            string text = string.Join("\n", result);
+            //string text = "https://github.com/Jurayevkh?tab=repositories";
+            string text = "";
+            foreach (var item in result)
+            {
+                text += $"{item.FirstName} , {item.LastName} ,Age: {item.Age}, Email: {item.Email}\n";
+            }
+
             byte[] QRCode = new byte[0];
 
             if (!string.IsNullOrEmpty(text))
             {
                 QRCodeGenerator generator = new QRCodeGenerator();
-                QRCodeData data = generator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
+                QRCodeData data = generator.CreateQrCode(text, QRCodeGenerator.ECCLevel.M);
                 BitmapByteQRCode bitmap = new BitmapByteQRCode(data);
                 QRCode = bitmap.GetGraphic(20);
             }
 
-            string QRCodeAsImageBase64 = $"data:image/png;base64,{Convert.ToBase64String(QRCode)}";
+            return File(QRCode,"image/png");
 
-            return Ok(QRCodeAsImageBase64);
         }
     }
 }
