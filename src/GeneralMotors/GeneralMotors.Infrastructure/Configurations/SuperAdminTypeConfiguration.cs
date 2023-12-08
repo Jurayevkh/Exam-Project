@@ -1,8 +1,4 @@
-﻿using GeneralMotors.Domain.Entities.SuperAdmins;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace GeneralMotors.Infrastructure.Configurations;
+﻿namespace GeneralMotors.Infrastructure.Configurations;
 
 public class SuperAdminTypeConfiguration : IEntityTypeConfiguration<SuperAdmin>
 {
