@@ -1,5 +1,4 @@
-﻿using System.Net;
-using GeneralMotors.Application.UseCases.Clients.Commands;
+﻿using GeneralMotors.Application.UseCases.Clients.Commands;
 using GeneralMotors.Domain.Entities.Clients;
 
 namespace GeneralMotors.Application.UseCases.Clients.Handlers;
