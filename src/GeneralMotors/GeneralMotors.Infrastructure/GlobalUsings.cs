@@ -1,0 +1,12 @@
+﻿global using GeneralMotors.Application.Abstractions;
+global using GeneralMotors.Infrastructure.Data;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using GeneralMotors.Domain.Entities.Cars;
+global using GeneralMotors.Domain.Entities.CarTypes;
+global using GeneralMotors.Domain.Entities.Clients;
+global using GeneralMotors.Domain.Entities.Dillers;
+global using GeneralMotors.Domain.Entities.SuperAdmins;
+global using GeneralMotors.Infrastructure.Configurations;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
