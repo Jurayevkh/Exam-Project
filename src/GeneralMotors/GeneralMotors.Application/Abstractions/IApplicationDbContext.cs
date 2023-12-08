@@ -1,9 +1,5 @@
-﻿using GeneralMotors.Domain.Entities.Cars;
-using GeneralMotors.Domain.Entities.CarTypes;
-using GeneralMotors.Domain.Entities.Clients;
-using GeneralMotors.Domain.Entities.Dillers;
+﻿using GeneralMotors.Domain.Entities.Clients;
 using GeneralMotors.Domain.Entities.SuperAdmins;
-using Microsoft.EntityFrameworkCore;
 
 namespace GeneralMotors.Application.Abstractions;
 
