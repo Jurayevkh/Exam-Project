@@ -1,14 +1,4 @@
-﻿using System.Reflection;
-using GeneralMotors.Application.Abstractions;
-using GeneralMotors.Domain.Entities.Cars;
-using GeneralMotors.Domain.Entities.CarTypes;
-using GeneralMotors.Domain.Entities.Clients;
-using GeneralMotors.Domain.Entities.Dillers;
-using GeneralMotors.Domain.Entities.SuperAdmins;
-using GeneralMotors.Infrastructure.Configurations;
-using Microsoft.EntityFrameworkCore;
-
-namespace GeneralMotors.Infrastructure.Data;
+﻿namespace GeneralMotors.Infrastructure.Data;
 
 public class GeneralMotorDbContext:DbContext,IApplicationDbContext
 {
