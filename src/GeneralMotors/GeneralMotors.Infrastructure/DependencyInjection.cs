@@ -1,10 +1,4 @@
-﻿using GeneralMotors.Application.Abstractions;
-using GeneralMotors.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace GeneralMotors.Infrastructure;
+﻿namespace GeneralMotors.Infrastructure;
 
 public static class DependencyInjection
 { 
