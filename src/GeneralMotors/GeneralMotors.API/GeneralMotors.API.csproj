@@ -30,6 +30,7 @@
     <None Remove="DTOs\Dillers\" />
     <None Remove="DTOs\Clients\" />
     <None Remove="DTOs\CarClient\" />
+    <None Remove="BackgroundServices\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -38,5 +39,6 @@
     <Folder Include="DTOs\Dillers\" />
     <Folder Include="DTOs\Clients\" />
     <Folder Include="DTOs\CarClient\" />
+    <Folder Include="BackgroundServices\" />
   </ItemGroup>
 </Project>
