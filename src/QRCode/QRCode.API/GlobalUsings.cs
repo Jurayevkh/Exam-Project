@@ -6,4 +6,7 @@ global using QRCode.Application.UseCases.Users.Queries;
 global using QRCode.API.DTOs;
 global using QRCode.Application.UseCases.Users.Commands;
 global using QRCoder;
-global using System.Drawing;
+global using System.Text.Json;
+global using Microsoft.Extensions.Caching.Distributed;
+global using QRCode.Domain.Entities;
+global using QRCodes.API.BackgroundServices;
