@@ -5,26 +5,53 @@
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IDistributedCache _distributedCache;
 
-        public UsersController(IMediator mediator)
+
+        public UsersController(IMediator mediator, IDistributedCache distributedCache)
         {
             _mediator = mediator;
+            _distributedCache = distributedCache;
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetByIdUser(int id)
         {
-            var user = await _mediator.Send(new GetByIdUserQuery() { Id = id });
+            var fromCache = await _distributedCache.GetStringAsync($"GetByIdUser{id}");
 
-            return Ok(user);
+            if (fromCache is null)
+            {
+                var user = await _mediator.Send(new GetByIdUserQuery() { Id=id});
+
+                fromCache = JsonSerializer.Serialize(user);
+                await _distributedCache.SetStringAsync($"GetByIdUser{user.Id}", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<User>(fromCache);
+
+            return Ok(result);
         }
 
         [HttpGet]
         public async ValueTask<IActionResult> GetAllUsers()
         {
-            var user = await _mediator.Send(new GetAllUsersQuery());
+            var fromCache = await _distributedCache.GetStringAsync($"GetAllUsers");
 
-            return Ok(user);
+            if (fromCache is null)
+            {
+                var users = await _mediator.Send(new GetAllUsersQuery());
+
+                fromCache = JsonSerializer.Serialize(users);
+                await _distributedCache.SetStringAsync($"GetAllUsers", fromCache, new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+                });
+            }
+            var result = JsonSerializer.Deserialize<List<User>>(fromCache);
+
+            return Ok(result);
         }
 
         [HttpPost]

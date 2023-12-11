@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using static QRCoder.PayloadGenerator;
-
-namespace QRCodes.API.Controllers
+﻿namespace QRCodes.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class QRCodesController : ControllerBase
     {
@@ -38,8 +35,26 @@ namespace QRCodes.API.Controllers
             }
 
             return File(QRCode,"image/png");
-
         }
+
+        [HttpGet]
+        public async ValueTask<IActionResult> GetQRCodeById(int id)
+        {
+            var user = await _mediator.Send(new GetByIdUserQuery() { Id=id});
+            string text = user.ToString();
+
+            byte[] QRCode = new byte[0];
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                QRCodeGenerator generator = new QRCodeGenerator();
+                QRCodeData data = generator.CreateQrCode(text, QRCodeGenerator.ECCLevel.M);
+                BitmapByteQRCode bitmap = new BitmapByteQRCode(data);
+                QRCode = bitmap.GetGraphic(20);
+            }
+            return File(QRCode,"image/png");
+        }
+
     }
 }
 
