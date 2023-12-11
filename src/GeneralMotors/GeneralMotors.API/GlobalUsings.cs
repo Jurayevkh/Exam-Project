@@ -17,3 +17,6 @@ global using GeneralMotors.Application.UseCases.Dillers.Queries;
 global using GeneralMotors.API.DTOs.CarClient;
 global using GeneralMotors.Application.UseCases.CarClients.Commands;
 global using GeneralMotors.Application.UseCases.CarClients.Queries;
+global using GeneralMotors.API.BackgroundServices;
+global using GeneralMotors.Application;
+global using GeneralMotors.Infrastructure;
