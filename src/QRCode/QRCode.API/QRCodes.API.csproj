@@ -15,6 +15,7 @@
     </PackageReference>
     <PackageReference Include="QRCoder" Version="1.4.3" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.11" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,9 +29,11 @@
   <ItemGroup>
     <None Remove="DTOs\" />
     <None Remove="Controllers\" />
+    <None Remove="BackgroundServices\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Controllers\" />
+    <Folder Include="BackgroundServices\" />
   </ItemGroup>
 </Project>
