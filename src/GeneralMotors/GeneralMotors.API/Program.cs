@@ -1,7 +1,4 @@
-﻿using GeneralMotors.Application;
-using GeneralMotors.Infrastructure;
-
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddStackExchangeRedisCache(options =>
@@ -10,11 +7,12 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "local";
 });
 
+builder.Services.AddHostedService<CachingBackgroundService>();
+
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -27,7 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
