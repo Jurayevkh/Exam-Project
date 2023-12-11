@@ -1,0 +1,370 @@
+﻿{
+  "Routes": [
+//Car Client Routes Here: 
+    {
+      "DownstreamPathTemplate": "/api/CarClient/GetAllCarClient",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllCarClient",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/CarClient/GetByIdCarClient?id={CarClientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetByIdCarClient/{CarClientId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/CarClient/CreateCarClient",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateCarClient",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+
+//Car Routes Here:
+    {
+      "DownstreamPathTemplate": "/api/Cars/GetByIdCar?id={CarId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetByIdCar/{CarId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Cars/GetAllCar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllCar",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Cars/CreateCar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateCar",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Cars/UpdateCar",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateCar",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Cars/DeleteCar?id={CarId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteCar/{CarId}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+
+//Car Type Routes Here:
+    {
+      "DownstreamPathTemplate": "/api/CarType/GetAllCarType",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllCarType",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/CarType/GetByIdCarType?id={CarTypeId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetByIdCarType/{CarTypeId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+
+//Client Routes Her:
+    {
+      "DownstreamPathTemplate": "/api/Client/GetByIdClients?id={ClientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetByIdClients/{ClientId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Client/GetAllClients",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllClients",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Client/CreateClient",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateClient",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Client/UpdateClient",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateClient",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Client/DeleteClient?id={ClientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteClient/{ClientId}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+
+//Diller Routes Here:
+    {
+      "DownstreamPathTemplate": "/api/Diller/GetByIdDiller?id={DillerId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetByIdDiller/{DillerId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Diller/GetAllDiller",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllDiller",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Diller/CreateDiller",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateDiller",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Diller/UpdateDiller",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateDiller",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Diller/DeleteDiller?id={DillerId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteDiller/{DillerId}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+
+
+//QRCode Routes Here:
+    {
+      "DownstreamPathTemplate": "/api/QRCodes/GetQRCode",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/GetQRCode",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/QRCodes/GetQRCodeById?id={UserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/GetQRCodeById/{UserId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+//User Routes Here:
+    {
+      "DownstreamPathTemplate": "/api/Users/GetByIdUser?id={UserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/GetByIdUser/{UserId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Users/GetAllUsers",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllUsers",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Users/CreateUser",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateUser",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Users/UpdateUser",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateUser",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Users/DeleteUser?id={UserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7134
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteUser/{UserId}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+  }
+}
