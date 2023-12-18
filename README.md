@@ -37,10 +37,10 @@ Bu loyiha Mikroservis arxitekturasiga tayangan holda tuzildi.
 
 ## 🛢 Ma'lumotlar bazasi
     General Motors:
-          ![Снимок экрана 2023-12-11 в 06 08 45](https://github.com/Jurayevkh/Exam-Project/assets/123798965/501ea785-2e9c-4a07-8e2d-7f8ec65f0f45)
+![Снимок экрана 2023-12-11 в 06 08 45](https://github.com/Jurayevkh/Exam-Project/assets/123798965/501ea785-2e9c-4a07-8e2d-7f8ec65f0f45)
     QR Code:
     QR Code loyihasi asosan kelgan ma'lumotlarni QR Code ko'rinishiga o'tkazib berish bo'lganligi uchun Databazasiga katta ahamiyat berilmadi:
-          ![Снимок экрана 2023-12-11 в 06 12 45](https://github.com/Jurayevkh/Exam-Project/assets/123798965/482ccbbc-26ed-42a0-8d8a-84e45d402627)
+![Снимок экрана 2023-12-11 в 06 12 45](https://github.com/Jurayevkh/Exam-Project/assets/123798965/482ccbbc-26ed-42a0-8d8a-84e45d402627)
 
 ## 🚀 Ishlatish uchun
   ## 🛠 O'rnatish:
